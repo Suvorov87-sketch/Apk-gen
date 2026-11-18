@@ -1,0 +1,12 @@
+{
+  "repo": "TheyCallMeHex/LCM-Dreamshaper-V7-ONNX",
+  "files": [
+    {"name": "tokenizer/model.onnx", "url": "https://huggingface.co/TheyCallMeHex/LCM-Dreamshaper-V7-ONNX/resolve/main/tokenizer/model.onnx", "size": 1683168},
+    {"name": "tokenizer/merges.txt", "url": "https://huggingface.co/TheyCallMeHex/LCM-Dreamshaper-V7-ONNX/resolve/main/tokenizer/merges.txt", "size": 524619},
+    {"name": "tokenizer/vocab.json", "url": "https://huggingface.co/TheyCallMeHex/LCM-Dreamshaper-V7-ONNX/resolve/main/tokenizer/vocab.json", "size": 1059962},
+    {"name": "text_encoder/model.onnx", "url": "https://huggingface.co/TheyCallMeHex/LCM-Dreamshaper-V7-ONNX/resolve/main/text_encoder/model.onnx", "size": 492588002},
+    {"name": "unet/model.onnx", "url": "https://huggingface.co/TheyCallMeHex/LCM-Dreamshaper-V7-ONNX/resolve/main/unet/model.onnx", "size": 1948508},
+    {"name": "unet/model.onnx_data", "url": "https://huggingface.co/TheyCallMeHex/LCM-Dreamshaper-V7-ONNX/resolve/main/unet/model.onnx_data", "size": 3438411520},
+    {"name": "vae_decoder/model.onnx", "url": "https://huggingface.co/TheyCallMeHex/LCM-Dreamshaper-V7-ONNX/resolve/main/vae_decoder/model.onnx", "size": 198078038}
+  ]
+}
