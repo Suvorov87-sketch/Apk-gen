@@ -6,7 +6,7 @@ import kotlin.math.sqrt
 class LcmSchedulerKt(
     betaStart: Double = 0.00085,
     betaEnd: Double = 0.012,
-    trainSteps: Int = 1000,
+    private val trainSteps: Int = 1000,
     private val stepsOffset: Int = 1
 ) {
     private val acp: DoubleArray

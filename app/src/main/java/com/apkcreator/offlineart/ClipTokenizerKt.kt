@@ -8,7 +8,7 @@ class ClipTokenizerKt(private val vocab: Map<String, Int>, private val ranks: Ma
 
     fun encode(text: String): Enc {
         val low = StringBuilder(text.length)
-        for (ch in text) low.append(if (ch in 'A' || ch in 'B' || ch in 'C' || ch in 'D' || ch in 'E' || ch in 'F' || ch in 'G' || ch in 'H' || ch in 'I' || ch in 'J' || ch in 'K' || ch in 'L' || ch in 'M' || ch in 'N' || ch in 'O' || ch in 'P' || ch in 'Q' || ch in 'R' || ch in 'S' || ch in 'T' || ch in 'U' || ch in 'V' || ch in 'W' || ch in 'X' || ch in 'Y' || ch in 'Z') ch + ('a' - 'A') else ch)
+        for (ch in text) low.append(if (ch in 'A'..'Z') ch + ('a' - 'A') else ch)
         val t = low.toString()
         val re = Regex("[ ]?'(?:s|t|re|ve|m|ll|d)| ?\\p{L}+| ?[0-9]+| ?[^\\s\\p{L}0-9]+|\\s+")
         val ids = ArrayList<Int>()
