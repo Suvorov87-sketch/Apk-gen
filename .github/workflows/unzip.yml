@@ -1,1 +1,12 @@
-
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unzip project
+        run: |
+          python3 -c "import zipfile,glob; z=glob.glob('*.zip')[0]; zipfile.ZipFile(z).extractall('.')"
+          rm *.zip
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add -A
+          git commit -m "Unpack project" || echo "nothing to commit"
+          git push
