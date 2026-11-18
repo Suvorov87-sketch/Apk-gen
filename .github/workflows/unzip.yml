@@ -1,4 +1,4 @@
-name: Fix Kotlin bugs
+name: Fix TE output
 on: workflow_dispatch
 permissions:
   contents: write
@@ -10,21 +10,18 @@ jobs:
       - name: Patch sources
         run: |
           python3 - <<'EOF'
-          import io, re
-          p1 = "app/src/main/java/com/apkcreator/offlineart/LcmSchedulerKt.kt"
-          s = io.open(p1, encoding="utf-8").read()
-          s = s.replace("    trainSteps: Int = 1000,", "    private val trainSteps: Int = 1000,")
-          assert "private val trainSteps" in s, "patch1 failed"
-          io.open(p1, "w", encoding="utf-8").write(s)
-          p2 = "app/src/main/java/com/apkcreator/offlineart/ClipTokenizerKt.kt"
-          t = io.open(p2, encoding="utf-8").read()
-          t = re.sub(r"if \(ch in 'A'.*?\|\| ch in 'Z'\)", "if (ch in 'A'..'Z')", t, flags=re.S)
-          assert "ch in 'A'..'Z'" in t, "patch2 failed"
-          io.open(p2, "w", encoding="utf-8").write(t)
+          import io
+          p = "app/src/main/java/com/apkcreator/offlineart/DiffusionPipelineKt.kt"
+          s = io.open(p, encoding="utf-8").read()
+          s = s.replace("    private val te: OrtSession\n", "    private val te: OrtSession\n    private val teOut: String\n")
+          s = s.replace('require(te.outputNames.size == 1) { "TE: unexpected outputs" }', 'teOut = te.outputNames.firstOrNull { it == "last_hidden_state" } ?: te.outputNames.first()')
+          s = s.replace("val v = r[0].value as Array<Array<FloatArray>>", "val v = (r.get(teOut) ?: r[0]).value as Array<Array<FloatArray>>")
+          assert "private val teOut" in s and "last_hidden_state" in s and "r.get(teOut)" in s, "patch failed"
+          io.open(p, "w", encoding="utf-8").write(s)
           print("patched OK")
           EOF
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add -A
-          git commit -m "Fix Kotlin compile errors" || echo "nothing to commit"
+          git commit -m "Fix TE output select" || echo "nothing to commit"
           git push
